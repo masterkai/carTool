@@ -1,17 +1,26 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {CarTool} from "./components/CarTool";
+
+const carList = [
+  {
+    id: 1,
+    make: 'Ford',
+    model: 'Fusion Hybrid',
+    year: 2018,
+    color: 'silver',
+    price: 30000,
+  },
+  {
+    id: 2,
+    make: 'Tesla',
+    model: 'S',
+    year: 2017,
+    color: 'red',
+    price: 120000,
+  },
+]
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <CarTool cars={carList}/>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
