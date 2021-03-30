@@ -1,42 +1,52 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {carsPropTypes} from "../propTypes/cars";
+import ViewCarRow from "./ViewCarRow";
+import EditCarRow from './EditCarRow'
 
-const CarTable = ({cars}) => {
+const CarTable = ({
+                    cars, editCarId,
+                    onDeleteCar: deleteCar,
+                    onEditCar: editCar,
+                    onCancelCar: cancelCar,
+                    onSaveCar: saveCar
+                  }) => {
   const rederCars = cars => {
-    return cars.map(car => (
-      <tr key={car.id}>
-        <td>{car.id}</td>
-        <td>{car.make}</td>
-        <td>{car.model}</td>
-        <td>{car.year}</td>
-        <td>{car.color}</td>
-        <td>{car.price}</td>
-      </tr>
-    ))
+    return cars.map(car => car.id === editCarId ?
+      <EditCarRow key={car.id} car={car} onSaveCar={saveCar} onCancelCar={cancelCar}/> :
+      <ViewCarRow key={car.id} car={car} onDeleteCar={deleteCar} onEditCar={editCar}/>)
   }
   return (
     <table>
       <thead>
       <tr>
         <th>ID</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Color</th>
-        <th>Price</th>
+        <th><label htmlFor='edit-make-input'>Make</label></th>
+        <th><label htmlFor='edit-model-input'>Model</label></th>
+        <th><label htmlFor='edit-year-input'>Year</label></th>
+        <th><label htmlFor='edit-color-input'>Color</label></th>
+        <th><label htmlFor='edit-price-input'>Price</label></th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
-      {cars.length===0&&<tr><td colSpan='6'>There are no cars.</td></tr>}
+      {cars.length === 0 && <tr>
+        <td colSpan='7'>There are no cars.</td>
+      </tr>}
       {cars && rederCars(cars)}
       </tbody>
     </table>
   );
 };
 CarTable.defaultProps = {
-  cars:[]
+  cars: []
 }
 CarTable.propTypes = {
-  cars:carsPropTypes
+  cars: carsPropTypes,
+  editCarId: PropTypes.number,
+  onDeleteCar: PropTypes.func.isRequired,
+  onCancelCar: PropTypes.func.isRequired,
+  onSaveCar: PropTypes.func.isRequired,
+  onEditCar: PropTypes.func.isRequired,
 }
 export default CarTable;
