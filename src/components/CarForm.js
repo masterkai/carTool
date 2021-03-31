@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {forwardRef, memo} from 'react';
 import PropTypes from 'prop-types'
 import {useForm} from '../hooks/useForm'
 
-const CarForm = ({onSubmitCar, buttonText}) => {
+const CarForm = memo(forwardRef(({onSubmitCar, buttonText}, ref) => {
+  console.log('rendering car form');
   const [carForm, change, resetCarForm] = useForm({
     make: '',
     model: '',
@@ -23,6 +24,7 @@ const CarForm = ({onSubmitCar, buttonText}) => {
                value={carForm.make}
                onChange={change}
                name='make'
+               ref={ref}
         />
       </div>
       <div>
@@ -60,7 +62,7 @@ const CarForm = ({onSubmitCar, buttonText}) => {
       <button type='button' onClick={submitCar}>{buttonText}</button>
     </form>
   );
-};
+}));
 CarForm.defaultProps = {
   buttonText: 'Submit Car'
 }
