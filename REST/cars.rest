@@ -1,0 +1,37 @@
+
+
+GET http://localhost:3050/cars HTTP/1.1
+
+###
+
+GET http://localhost:3050/cars/2 HTTP/1.1
+
+###
+POST http://localhost:3050/cars HTTP/1.1
+Content-Type: application/json
+
+{
+  "make": "Ford",
+  "model": "T",
+  "year": 2017,
+  "color": "red",
+  "price": 120000
+}
+
+###
+
+PUT http://localhost:3050/cars/3 HTTP/1.1
+Content-Type: application/json
+
+{
+  "make": "Ford",
+  "model": "T",
+  "year": 1924,
+  "color": "red",
+  "price": 120000
+}
+
+###
+DELETE http://localhost:3050/cars/3 HTTP/1.1
+
+

@@ -1,4 +1,5 @@
 import React,{memo} from 'react';
+import Spinner from "../UI/Spinner";
 import PropTypes from 'prop-types'
 import {carsPropTypes} from "../propTypes/cars";
 import ViewCarRow from "./ViewCarRow";
@@ -31,7 +32,7 @@ const CarTable = memo(({
       </thead>
       <tbody>
       {cars.length === 0 && <tr>
-        <td colSpan='7'>There are no cars.</td>
+        <td colSpan='7'><Spinner/> cars is loading...</td>
       </tr>}
       {cars && rederCars(cars)}
       </tbody>
